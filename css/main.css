@@ -1,0 +1,39 @@
+body {
+  font-size: 14px;
+  line-height: 22px;
+  font-family: Helvetica Neue, Helvetica, Arial;
+  background: beige;
+}
+
+#wx-qrcode {
+	width: 400px;
+	height: 500px;
+	animation-name: spinning;
+	-moz-animation-name:spinning;
+	-webkit-animation-name:spinning;
+
+	animation-duration: 1s;
+	-moz-animation-duration: 1s;
+	-webkit-animation-duration: 1s;
+
+	animation-timing-function: ease;
+	-moz-animation-timing-function: ease;
+	-webkit-animation-timing-function: ease;
+
+	animation-delay: 0;
+	-moz-animation-delay: 0;
+	-webkit-animation-delay: 0;
+
+	animation-iteration-count: 1;
+	-moz-animation-iteration-count: 1;
+	-webkit-animation-iteration-count: 1;
+
+	animation-direction: normal;
+	-moz-animation-direction: normal;
+	-webkit-animation-direction: normal;
+}
+@keyframes spinning
+{
+	0%   {width:4px; height: 5px; transform:rotate(0deg);}
+	100% {width:400px; height: 500px; transform:rotate(1440deg);}
+}
