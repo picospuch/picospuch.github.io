@@ -1,0 +1,44 @@
+.wrapper:after {
+   content: "";
+   display: block; 
+   clear: both;
+}
+
+#header {
+    width: 500px;
+    margin: 40px auto 50px auto;
+}
+
+#footer {
+    border-color: #073642;
+}
+#footer {
+    width: 500px;
+    margin: 50px auto 20px auto;
+    padding-top: 10px;
+    font-size: 0.85em;
+    border-top: 1px solid #073642;
+}
+
+/* for mobile */
+@media all and (max-width: 870px) {
+
+	#header, #footer, .wrapper {
+		width: inherit;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	#navigation {
+		position: relative;
+		text-align: left;
+		width: 100%;
+		left: 0;
+		margin: 10px 10px 20px 10px;
+	}
+
+	#navigation select.mnav {
+		display: block;
+		margin-bottom: 15px;
+	}
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>理解JavaScript执行序控制</title>
+	<meta name="generator" content="Zim 0.63">
+	<meta name="viewport" content="width=device-width">
+	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:300&subset=latin,greek,latin-ext' rel='stylesheet' type='text/css'> -->
+	<link href="/pblog/asset/css/reset.css" type="text/css" rel="stylesheet"/>
+	<link href="/pblog/asset/css/zim.css" type="text/css" rel="stylesheet"/>
+	<link href="/pblog/asset/css/colors-dark.css" type="text/css" rel="stylesheet"/>
+  <link href="/pblog/asset/css/main.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+	<header id="header">
+		<div id="fortune">
+			Howe's Law:<br />
+		Everyone has a scheme that will not work.
+		</div>
+	</header>
+	<div class="wrapper">
+		<div id="navigation"> <ul>
+<li><a href="../Index.html" title="Index" class="page">Index</a></li>
+<li><a href="../Page.html" title="Page" class="page">Page</a>
+<ul>
+<li><a href="./20130430.html" title="20130430" class="page">20130430</a></li>
+<li><b>20160617</b></li>
+<li><a href="./20160706.html" title="20160706" class="page">20160706</a></li>
+</ul></li>
+</ul>
+ </div>
+		<div id="content">
+			<h1>理解JavaScript执行序控制 <a name='Page:20160617'></a></h1>
+
+			<p>
+Created Friday 17 June 2016
+</p>
+
+<h5>执行序</h5>
+
+<p>
+我们编写js代码的时候, 看到的是js代码的文本, 而js的执行序却不一定是文本序.<br>
+每当我们编写异步代码的时候, 程序的执行序就变得复杂, 同一个文件文本里面的代码执行的时机不同, 这造成了理解上的困难.<br>
+如果你编写过汇编语言代码, 这种困难是不存在的, 因为文本序基本上一定是执行序.<br>
+如果你编写过css代码, 这种困难也是不存在的, 因为你知道文本序一定不是执行序, 而执行序你根本就不用关心.<br>
+产生这种差异的就是语言之间声明式(declarative)或者命令式(imperative)的差异(汇编是命令式, css是声明式), 而js编程范式可以介于这两者之间, 所以需要有一些控制和协调方法管理执行序.
+</p>
+
+<h5>执行序控制方法</h5>
+
+<p>
+执行序控制方法其实大体上也就是如何处理异步编程的方法. 要么把js完全写成声明式, 执行序完全和文本无关, 要么写成命令式程序文本描述了执行过程. 完全的声明式去掉了执行序描述, 但是需要更多的文本来给解释器提示, 提示解释器如何根据规则得到结果, 结果就像callback/event/promise/rxjs重复代码随着逻辑变得复杂越来越多. 而generator是向命令式靠拢, 程序文本的顺序尽可能描述了执行过程, 结果就少了很多类似boilerplate的代码.<br>
+既然如此, js直接设计成命令式的不就可以了? 恩, 当然可以, 为了执行js可能不止是需要一个解释器了, 还需要一个完整的操作系统, 就像C语言一样. 另外, 异步带来的效率优化效果也没有了.
+</p>
+
+<h5>Generator控制</h5>
+
+<p>
+generator是一种常见的设计模式, 程序的执行中, 可以暂停在函数的中间位置, 保持执行上下文, 返回中间结果, 再次调用的时候可以继续执行.<br>
+es6中引入了generator和promise, 目前处于es8 proposal(stage 3)中的async/await, async/await是受到task.js的启发, 基于generator和promise从语言层面实现generator的"协调器" [ref: <a href="https://tc39.github.io/ecmascript-asyncawait/" title="https://tc39.github.io/ecmascript-asyncawait/" class="https">https://tc39.github.io/ecmascript-asyncawait/</a> ]. 类似的还有co.js这个协调器. 基于generator的异步转同步都不完美, 特别是当你完全把他们当作同步代码来编写的时候, 你却发现异步还是异步, function*还是function*, function还是function. await/async让代码显得有些凌乱.
+</p>
+
+
+			<br>
+			<span class="backlinks">
+				<hr class='footnotes'>
+				<b>Backlinks:</b>
+				<a href='../Index.html'>Index</a>
+				
+				<a href='../Index/nodejs.html'>Index:nodejs</a>
+				<br /><br />
+			</span>
+
+			
+
+    <div id="myduoshuo">
+      <!-- 多说评论框 start -->
+    	<div class="ds-thread" data-thread-key="Page:20160617" data-title="理解JavaScript执行序控制" data-url="#Page:20160617"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+        var duoshuoQuery = {short_name:"picospuch"};
+      	(function() {
+      		var ds = document.createElement('script');
+      		ds.type = 'text/javascript';ds.async = true;
+      		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      		ds.charset = 'UTF-8';
+      		(document.getElementsByTagName('head')[0]
+      		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+      	})();
+    	</script>
+      <!-- 多说公共JS代码 end -->
+    </div><!--~myduoshuo -->
+		</div>
+	</div>
+	<footer id="footer">
+    <p class="copyright">Copyright © 2016 picospuch.</p>
+  </footer>
+	<script type="text/javascript" src="/pblog/asset/js/jquery-3.0.0.js"></script>
+	<script type="text/javascript" src="/pblog/asset/js/main.js"></script>
+</body>
+</html>

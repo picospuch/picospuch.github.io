@@ -5,6 +5,9 @@ body {
   background: beige;
 }
 
+.img-icon {
+	height: 1.3em;
+}
 #wx-qrcode {
 	width: 400px;
 	height: 500px;

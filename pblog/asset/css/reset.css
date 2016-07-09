@@ -1,0 +1,15 @@
+body, html {
+  height:100%;
+  font-family:'Open Sans', sans-serif;
+  line-height:1.5em;
+  font-weight:300;
+  background-color:#FAFAFA;
+  text-rendering:geometricPrecision;
+  margin:0;
+  padding:0;
+}
+
+h1 {
+  font-size: 2em;
+  line-height: 1em;
+}
